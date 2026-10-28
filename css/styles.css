@@ -1,0 +1,212 @@
+/* =========================================
+   Portafolio Interactivo - Estilos (PC3)
+   ========================================= */
+
+/* Buenas prácticas: evitar desbordamiento horizontal */
+html,
+body {
+    overflow-x: hidden;
+}
+
+.logo {
+    color: #0d6efd;
+}
+
+/* =========================================
+   1. ANIMACIÓN DE CARGA (LOADER)
+   ========================================= */
+#loader-wrapper {
+    position: fixed;
+    inset: 0;
+    background-color: #212529;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Oculta el loader después de 2 segundos (CSS puro) */
+    animation-name: ocultarLoader;
+    animation-duration: 0.5s;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #495057;
+    border-top-color: #0d6efd;
+    border-radius: 50%;
+    /* Spinner girando infinitamente */
+    animation-name: girar;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ocultarLoader {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* =========================================
+   2. ANIMACIÓN PERSONALIZADA (@keyframes)
+   ========================================= */
+
+/* Texto que aparece deslizándose */
+.titulo-animado {
+    animation-name: deslizarIzquierda;
+    animation-duration: 1.2s;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes deslizarIzquierda {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Texto que cambia de color y tamaño constantemente */
+.texto-animado {
+    animation-name: colorTamano;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes colorTamano {
+    0% {
+        color: #212529;
+        transform: scale(1);
+    }
+    50% {
+        color: #0d6efd;
+        transform: scale(1.03);
+    }
+    100% {
+        color: #6610f2;
+        transform: scale(1);
+    }
+}
+
+/* =========================================
+   3. TRANSFORMACIONES 2D (HOVER) + TRANSITION
+   ========================================= */
+.caja {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+}
+
+.caja .etiqueta {
+    display: inline-block;
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.caja:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Caja 1: Rotación */
+.caja-rotar:hover {
+    transform: rotate(8deg);
+}
+
+/* Caja 2: Escalado */
+.caja-escalar:hover {
+    transform: scale(1.1);
+}
+
+/* Caja 3: Traslación y Sesgado */
+.caja-trasladar:hover {
+    transform: translateY(-15px) skew(-6deg);
+}
+
+/* =========================================
+   4. TRANSFORMACIONES 3D
+   ========================================= */
+
+/* Elemento padre con perspectiva */
+.escena-3d {
+    width: 100%;
+    max-width: 320px;
+    height: 220px;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+/* Tarjeta que conserva el espacio 3D */
+.tarjeta-3d {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+.escena-3d:hover .tarjeta-3d {
+    transform: rotateX(15deg) rotateY(180deg);
+}
+
+.cara {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    backface-visibility: hidden;
+}
+
+.cara-frontal {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+}
+
+.cara-trasera {
+    background: linear-gradient(135deg, #212529, #495057);
+    transform: rotateY(180deg);
+}
+
+/* =========================================
+   5. RESPONSIVIDAD
+   ========================================= */
+@media (max-width: 767px) {
+    .escena-3d {
+        height: 180px;
+    }
+
+    .caja {
+        padding: 20px;
+    }
+}
